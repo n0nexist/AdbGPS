@@ -59,8 +59,8 @@ class logger:
 class adb:
     def adb_location():
         """ gets the gps location of the connected adb device """
-        output = os.popen("adb shell dumpsys location").read()
-        temp = output.split("Location[")[1].split(" h")[0].split(" ")[1].split(",")
+        output = os.popen("adb shell dumpsys location | grep Location").read()
+        temp = output.split("Location[")[1].split(" ")[1].split(",")
         try:
             os.environ['lastpos'] = '{"lat": "'+temp[0]+'", "lon": "'+temp[1]+'"}'
         except:
